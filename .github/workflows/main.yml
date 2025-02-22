@@ -12,11 +12,18 @@ jobs:
     steps:
       - name: Checkout do repositório
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 1  # opcional, mas já diminui a quantidade de histórico
+
+      - name: Remover pasta .git e outros diretórios indesejados
+        run: |
+          rm -rf .git
+          rm -rf .github  # Se desejar também remover a pasta .github
 
       - name: Sincronizar arquivos com o S3
         uses: jakejarvis/s3-sync-action@v0.5.1
         with:
-          args: --acl public-read --delete --exclude ".git*" --exclude ".git/*" --exclude ".github*" --exclude ".github/*"
+          args: --acl public-read --delete
         env:
           AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
