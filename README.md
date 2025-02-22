@@ -1,6 +1,6 @@
-# Aws Cloud Foundations
-
 # Projeto Website Estático com CI/CD na AWS
+
+# [Aws Cloud Foundations]
 
 Este repositório contém um website estático em HTML e demonstra como configurar uma pipeline de CI/CD utilizando GitHub Actions para fazer o deploy automático para um bucket S3 na AWS.
 
@@ -74,6 +74,23 @@ Este repositório contém um website estático em HTML e demonstra como configur
 
 - **Configurar o Bucket S3:**  
   Verifiquem as configurações do bucket S3 para hospedagem de site estático e a política de acesso público.
+  Aplicar a politica no seu bucket, para não permitir somente que leiam os arquivos e não apaguem:
+
+         {
+            "Version": "2012-10-17",
+            "Statement": [
+               {
+                  "Sid": "PublicReadGetObject",
+                  "Effect": "Allow",
+                  "Principal": "*",
+                  "Action": "s3:GetObject",
+                  "Resource": "arn:aws:s3:::meu-website-static/*"
+               }
+            ]
+         }
+
+  Habilitar em propriedades para ser um repositorio de site estático:
+  ![alt text](image-1.png)
 
 - **Ajustar o Repositório:**  
   Caso necessário, modifiquem a estrutura ou os arquivos do website na pasta `website` e observem como o deploy é refletido automaticamente após cada push para o branch `main`.
