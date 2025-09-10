@@ -224,7 +224,9 @@ strong {
 small, .small {
   font-size: 0.875em;
 }
-
+.linka{
+  text-decoration: none;
+}
 mark, .mark {
   padding: 0.1875em;
   background-color: var(--bs-highlight-bg);
